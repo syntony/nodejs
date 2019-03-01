@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  .wrapper
+    - const upName = name.toUpperCase();
+    p.wrapper Hello my dogs name is #{upName}
+    img.dog(src="dog.jpg" alt=`Dog ${name}`)
+
+  h2
+    | Hello
+    em How are you?
