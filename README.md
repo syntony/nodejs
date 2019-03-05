@@ -10,3 +10,12 @@ If you have previously loaded in this data, you can wipe your database 100% clea
 
 ```bash
 npm run blowitallaway
+```
+
+That will populate 16 stores with 3 authors and 41 reviews. The log follows:
+
+|Name|Email (login)|Password|
+|---|---|---|
+|Wes Bos|wes@exmple.com|wes|
+|Debbie Downer|debbie@example.com|debbie|
+|Beau|beau@example.com|beau|
