@@ -33,12 +33,13 @@ function loadPlaces (map, lat = 43.2, lng = -79.8) {
         const html = `
           <div class="popup">
             <a href="/store/${this.place.slug}">
-              <img src="/>uploads/${this.place.photo || 'store.png'}" alt="${this.place.name}" />
+              <img src="/uploads/${this.place.photo || 'store.png'}" alt="${this.place.name}" />
+              <p>${this.place.name} - ${this.place.location.address}</p>
             </a>
           </div>
         `;
 
-        infoWindow.setContent(this.place.name);
+        infoWindow.setContent(html);
         infoWindow.open(map, this);
       }))
 
@@ -58,6 +59,10 @@ function makeMap(mapDiv) {
 
   const input = $('[name="geolocate"]');
   const autocomplete = new google.maps.places.Autocomplete(input);
+  autocomplete.addListener('place_changed', () => {
+    const place = autocomplete.getPlace();
+    loadPlaces(map, place.geometry.location.lat(), place.geometry.location.lng());
+  })
 }
 
 export default makeMap;
