@@ -8,7 +8,7 @@ const authController = require('../controllers/authController');
 const reviewController = require('../controllers/reviewController');
 
 // Do work here
-router.get('/', storeController.homePage);
+router.get('/', catchErrors(storeController.getStores));
 
 router.get('/add', authController.isLoggedIn, storeController.addStore);
 router.post('/add',
@@ -32,12 +32,13 @@ router.get('/tags/:tag', catchErrors(storeController.getStoreByTag));
 router.get('/login', userController.loginForm);
 router.post('/login', authController.login);
 router.get('/register', userController.registerForm);
-// 1. Validate data
-// 2. Register the user
-// 3, Log them in
+
 router.post('/register',
+  // Validate data
   userController.validateRegister,
+  // Register the user
   userController.register,
+  // Log them in
   authController.login
 );
 
@@ -63,6 +64,8 @@ router.post('/reviews/:id',
   authController.isLoggedIn,
   catchErrors(reviewController.addReview)
 );
+
+router.get('/top', catchErrors(storeController.getTopStores));
 
 /*
   API

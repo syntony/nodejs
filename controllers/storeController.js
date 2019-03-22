@@ -57,7 +57,7 @@ exports.createStore = async (req, res) => {
 
 exports.getStores = async (req, res) => {
   // query DB for a lis of all all stores
-  const stores = await Store.find();
+  const stores = await Store.find().populate('reviews');
 
   res.render('stores', {
     title: 'Stores',
@@ -97,7 +97,8 @@ exports.updateStore = async (req, res) => {
 }
 
 exports.getStoreBySlug = async(req, res, next) => {
-  const store = await Store.findOne({ slug: req.params.slug }).populate('author');
+  const store = await Store.findOne({ slug: req.params.slug })
+    .populate('author reviews');
   if (!store) return next();
   res.render('store', { store, title: store.name })
 }
@@ -177,4 +178,10 @@ exports.getHearts = async (req, res) => {
     title: 'Hearted Stores',
     stores
   });
+}
+
+exports.getTopStores = async (req, res) => {
+  const stores = await Store.getTopStores();
+
+  res.render('topStores', { stores, title: `★ Top Stores!` });
 }
