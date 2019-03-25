@@ -60,7 +60,7 @@ exports.getStores = async (req, res) => {
   const limit = 4;
   const skip = (page * limit) - limit;
   // query DB for a lis of all all stores
-  const storesPromise = await Store
+  const storesPromise = Store
     .find()
     .skip(skip)
     .limit(limit)
