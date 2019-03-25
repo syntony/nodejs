@@ -1,5 +1,10 @@
-/node_modules
-/.idea
-/public/dist
-/public/uploads
+node_modules/
+.DS_Store
+.idea
+*.log
+haters/
 variables.env
+variables.env.now
+
+public/dist
+public/uploads
